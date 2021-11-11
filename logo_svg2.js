@@ -26,7 +26,7 @@ var left2 = false
 
 trigger2.addEventListener("mouseleave", (e)=>{
     left2 = true;
-    var exit_point = [e.clientX, e.clientY]
+    var exit_point = [cursorPoint(e).x, cursorPoint(e).y]
     var anim = anime({
         targets: wave_attr2,
         size: 0,
