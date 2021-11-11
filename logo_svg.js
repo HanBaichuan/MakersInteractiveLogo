@@ -11,7 +11,7 @@ var wave_attr = {
 }
 var left = false
 
-trigger.addEventListener("mouseleave", (e)=>{
+trigger.addEventListener("pointerleave", (e)=>{
     left = true;
     var exit_point = [e.clientX, e.clientY]
     var anim = anime({
@@ -45,7 +45,7 @@ trigger.addEventListener("mouseleave", (e)=>{
     //wave.setAttribute("cx", e.clientX)
     //wave.setAttribute("cy", e.clientY)
 })
-trigger.addEventListener("mouseenter", (e)=>{{
+trigger.addEventListener("pointerenter", (e)=>{{
     left = false;
     var enter_point = [e.clientX, e.clientY]
     console.log(enter_point)
