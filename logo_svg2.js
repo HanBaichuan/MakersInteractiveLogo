@@ -61,7 +61,7 @@ trigger2.addEventListener("pointerleave", (e)=>{
 trigger2.addEventListener("pointerenter", (e)=>{{
     left2 = false;
     var enter_point = [cursorPoint(e).x, cursorPoint(e).y]
-    console.log(enter_point)
+    //console.log(enter_point)
     var anim = anime({
         targets: wave_attr2,
         size: 170,
