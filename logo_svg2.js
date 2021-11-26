@@ -60,6 +60,7 @@ trigger2.addEventListener("pointerleave", (e)=>{
 })
 trigger2.addEventListener("pointerenter", (e)=>{{
     left2 = false;
+    //another svg needs its own reference for enter point
     var enter_point = [cursorPoint(e).x, cursorPoint(e).y]
     //console.log(enter_point)
     var anim = anime({
@@ -71,13 +72,16 @@ trigger2.addEventListener("pointerenter", (e)=>{{
             if(left2){
                 anim.pause()
             }
+            //scale up the wave circle
             wave2.setAttribute("r", wave_attr2.size)
             for(var i = 0; i < dots2.length; i++){
                 var dx = enter_point[0] - dots2[i].getAttribute("cx")
                 var dy = enter_point[1] - dots2[i].getAttribute("cy")
+                //distance between wave center and dot center
                 var d = (dx**2 + dy**2) ** (1/2)
                 if (wave_attr2.size > d - 0.5){
                     var r_n = dots2[i].getAttribute("init_r")
+                    //grow the dots once. set mode to grow to avoid playing the anime more than once.
                     if(dots2[i].getAttribute("mode") == null || dots2[i].getAttribute("mode") == "shrink"){
                         anime({
                             targets: dots2[i],

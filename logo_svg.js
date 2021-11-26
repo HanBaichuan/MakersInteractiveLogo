@@ -11,6 +11,9 @@ var wave_attr = {
 }
 var left = false
 
+//global mouse speed
+var mouse_speed = {"speedX": 0, "speedY": 0, "speed": 0}
+
 trigger.addEventListener("pointerleave", (e)=>{
     left = true;
     var exit_point = [e.clientX, e.clientY]
@@ -18,7 +21,7 @@ trigger.addEventListener("pointerleave", (e)=>{
         targets: wave_attr,
         size: 0,
         easing: "easeOutQuint",
-        duration: 2000,
+        duration: 500 + params["propogation_speed"] / 100 * 4000,
         update: function(){
             if(!left){
                 anim.pause()
@@ -34,7 +37,7 @@ trigger.addEventListener("pointerleave", (e)=>{
                         anime({
                             targets: dots[i],
                             r: r_n*1,
-                            fill: "rgba(255,255,255,0.5)",
+                            fill: "rgba(255,255,255," + params["begin_colour"]/255 + ")",
                         }) 
                     }
                     dots[i].setAttribute("mode", "shrink")
@@ -53,7 +56,7 @@ trigger.addEventListener("pointerenter", (e)=>{{
         targets: wave_attr,
         size: 170,
         easing: "easeOutQuint",
-        duration: 2000,
+        duration: 500 + params["propogation_speed"] / 100 * 4000,
         update: function(){
             if(left){
                 anim.pause()
@@ -68,8 +71,8 @@ trigger.addEventListener("pointerenter", (e)=>{{
                     if(dots[i].getAttribute("mode") == null || dots[i].getAttribute("mode") == "shrink"){
                         anime({
                             targets: dots[i],
-                            r: r_n*1.35,
-                            fill: "rgba(255,255,255,1)",
+                            r: r_n*1.35*params['exaggeration']/100,
+                            fill: "rgba(255,255,255," + params["end_colour"]/255 + ")",
                         }) 
                     }
                     dots[i].setAttribute("mode", "grow")
@@ -121,3 +124,47 @@ function createMakersLogo(x,y,g){
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 } */
+
+var params = {
+    "begin_colour": 50,
+    "end_colour": 50,
+    "exaggeration": 50,
+    "propogation_speed": 50
+}
+
+var sliders = document.getElementsByClassName('slider')
+for (i in sliders){
+    if(sliders[i].className == "slider"){
+        sliders[i].addEventListener('change', (e)=>{
+            params[e.target.id] = parseFloat(e.target.value)
+            console.log(params)
+        })
+    }
+}
+
+//Track mouse speed
+var timestamp = null;
+var lastMouseX = null;
+var lastMouseY = null;
+
+document.body.addEventListener("mousemove", function(e) {
+    if (timestamp === null) {
+        timestamp = Date.now();
+        lastMouseX = e.screenX;
+        lastMouseY = e.screenY;
+        return;
+    }
+
+    var now = Date.now();
+    var dt =  now - timestamp;
+    var dx = e.screenX - lastMouseX;
+    var dy = e.screenY - lastMouseY;
+    var speedX = Math.round(dx / dt * 100);
+    var speedY = Math.round(dy / dt * 100);
+    mouse_speed['speedX'] = Math.abs(speedX)
+    mouse_speed['speedY'] = Math.abs(speedY)
+    mouse_speed['speed'] = (speedX**2 + speedY**2) ** (1/2)
+    timestamp = now;
+    lastMouseX = e.screenX;
+    lastMouseY = e.screenY;
+});

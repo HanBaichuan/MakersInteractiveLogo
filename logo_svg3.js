@@ -1,7 +1,7 @@
 var dots3 = document.getElementsByClassName("dot3")
 
 var dot3_attr = {
-    size: 0.5,
+    size: 0,
     transparency: 1
 }
 
@@ -9,7 +9,7 @@ anime({
     targets: dot3_attr,
     size: 6,
     transparency: 1,
-    duration: 3000,
+    duration: 1000,
     loop: true,
     direction: 'alternate',
     easing: 'easeInOutSine',
