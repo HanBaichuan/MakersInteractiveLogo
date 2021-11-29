@@ -228,9 +228,9 @@ class Logo extends HTMLElement{
                 }
                 var anim = anime({
                     targets: wave_attr,
-                    size: 170 * clamp(force/130, 1, 1.5),
+                    size: 170,
                     easing: "easeOutQuint",
-                    duration: 3000,
+                    duration: 3000 * clamp(force/130, 1, 1.5),
                     update: function(){
                         wave.setAttribute("r", wave_attr.size)
                         for(var i = 0; i < dots.length; i++){
@@ -243,8 +243,8 @@ class Logo extends HTMLElement{
                                     anime({
                                         targets: dots[i],
                                         keyframes:[
-                                            {r: r_n*r_n/3.4 * clamp(force/100, 0.75, 1.0), fill: "rgba(255,255,255,1)", delay:0},
-                                            {r: r_n, fill: "rgba(255,255,255,1)", delay:0},
+                                            {r: r_n*r_n/3.4 * clamp(force/100, 0.8, 1.1), fill: "rgba(255,255,255,0.3)"},
+                                            {r: r_n, fill: "rgba(255,255,255,1)"},
                                         ],  
                                         easing: "linear",
                                         delay: 0,
@@ -301,7 +301,7 @@ class Logo extends HTMLElement{
                                     anime({
                                         targets: dots[i],
                                         keyframes:[
-                                            {r: r_n*r_n/15, fill: "rgba(255,255,255,1)", delay:0},
+                                            {r: r_n*r_n/15, fill: "rgba(255,255,255,0.3)", delay:0},
                                             {r: r_n, fill: "rgba(255,255,255,1)", delay:0},
                                         ],  
                                         easing: "linear",
