@@ -127,7 +127,7 @@ class Logo extends HTMLElement{
         }
         var trigger = document.createElementNS("http://www.w3.org/2000/svg", "rect"); 
         trigger.style.fill = "rgba(255, 255, 255, 0)"
-        setAttributes(trigger, {width:120, height:120, transform: "translate(95 5), rotate(45)"})
+        setAttributes(trigger, {width:120, height:120, transform: "translate(85 0), rotate(45)"})
         var wave = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         wave.style.fill = "rgba(255, 255, 255, 0)"
         setAttributes(wave, {cx:200, cy:200, r: 0, "pointer-events":"none"})
@@ -243,7 +243,7 @@ class Logo extends HTMLElement{
                                     anime({
                                         targets: dots[i],
                                         keyframes:[
-                                            {r: r_n*r_n/3.4 * clamp(force/100, 0.8, 1.1), fill: "rgba(255,255,255,0.3)"},
+                                            {r: r_n*r_n/3.4 * clamp(force/100, 0.8, 1.1), fill: "rgba(255,255,255,1)"},
                                             {r: r_n, fill: "rgba(255,255,255,1)"},
                                         ],  
                                         easing: "linear",
@@ -301,7 +301,7 @@ class Logo extends HTMLElement{
                                     anime({
                                         targets: dots[i],
                                         keyframes:[
-                                            {r: r_n*r_n/15, fill: "rgba(255,255,255,0.3)", delay:0},
+                                            {r: r_n*r_n/15, fill: "rgba(255,255,255,1)", delay:0},
                                             {r: r_n, fill: "rgba(255,255,255,1)", delay:0},
                                         ],  
                                         easing: "linear",
